@@ -26,7 +26,8 @@ interface NewsArticle {
     title: string;
     description: string | null;
     url: string;
-    urlToImage: string | null;
+    image: string | null;
+    publish_date:string;
     publishedAt: string;
     content: string | null;
   }
