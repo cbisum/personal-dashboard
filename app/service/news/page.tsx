@@ -29,23 +29,20 @@ interface NewsArticle {
     content: string | null;
   }
   
-  interface NewsState {
-    articles: NewsArticle[];
-  }
 
 const News =()=>{
     const [data, setData] = useState<NewsArticle[]>([])
-    const [selectedSource, setSelectedSource] = useState<string>("all")
+    const [selectedSource, setSelectedSource] = useState<string | null >("all")
 
     const fetchData = async()=>{
         try {
-            let response;
+            let response:any = {};
             if(selectedSource==="all"){
                 response=   await fetch(`https://newsapi.org/v2/top-headlines?country=au&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}`)
             }else {
                 response= await fetch(`https://newsapi.org/v2/everything?q=${selectedSource}&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}`)
             }
-            const {articles} = await response?.json()
+            const { articles } = await response?.json()
             setData(articles)
         } catch (error) {
                 console.log(error)
@@ -64,7 +61,10 @@ const News =()=>{
         <select
           className="p-2 border border-gray-300 rounded-md"
           value={selectedSource || ''}
-          onChange={(e: React.FormEvent<HTMLInputElement>) => setSelectedSource(e.target.value)}
+          onChange={(e: React.FormEvent<HTMLSelectElement>)=> {
+            let currentValue = e.target as HTMLSelectElement;
+            setSelectedSource(currentValue.value)
+          }}
         >
           <option value="all">All</option>
           {sourceOptions?.map((source, index) => (
