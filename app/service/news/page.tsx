@@ -1,6 +1,8 @@
 "use client"
 
 // https://newsapi.org/v2/top-headlines?country=au&apiKey=2599f3f0235244f29c87365e86c5fa47
+
+//https://api.worldnewsapi.com/search-news?api-key=707885667a65470fa2ac750c6aee4f06&text=tesla
 import React, { useEffect, useState } from "react"
 
 const sourceOptions = [
@@ -32,18 +34,19 @@ interface NewsArticle {
 
 const News =()=>{
     const [data, setData] = useState<NewsArticle[]>([])
-    const [selectedSource, setSelectedSource] = useState<string | null >("all")
+    const [selectedSource, setSelectedSource] = useState<string | null >("world")
 
     const fetchData = async()=>{
         try {
             let response:any = {};
-            if(selectedSource==="all"){
-                response=   await fetch(`https://newsapi.org/v2/top-headlines?country=au&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}`)
+            if(selectedSource==="world"){
+                //https://api.worldnewsapi.com/search-news?api-key=${process.env.NEXT_PUBLIC_NEWS_API_KEY}&text=world
+                response=   await fetch(`https://api.worldnewsapi.com/search-news?api-key=${process.env.NEXT_PUBLIC_NEWS_API_KEY}&text=${selectedSource}`)
             }else {
-                response= await fetch(`https://newsapi.org/v2/everything?q=${selectedSource}&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}`)
+                response= await fetch(`https://api.worldnewsapi.com/search-news?api-key=${process.env.NEXT_PUBLIC_NEWS_API_KEY}&text=${selectedSource}`)
             }
-            const { articles } = await response?.json()
-            setData(articles)
+            const { news } = await response?.json()
+            setData(news)
         } catch (error) {
                 console.log(error)
         }
@@ -77,9 +80,10 @@ const News =()=>{
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {data?.map((article, index) => (
           <div key={index} className="bg-white p-4 rounded-md shadow-md">
+            {article?.image && <img src={article.image} alt="News Thumbnail" className="news-image" />}
             <h2 className="text-xl font-bold mb-2">{article.title}</h2>
             <p className="text-gray-600">{article.author}</p>
-            <p className="text-gray-600">{new Date(article.publishedAt).toLocaleString()}</p>
+            <p className="text-gray-600">{new Date(article.publish_date).toLocaleString()}</p>
             <p className="text-gray-800 mt-2">{article.description}</p>
             <a href={article.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 mt-4 block hover:underline">
               Read more
