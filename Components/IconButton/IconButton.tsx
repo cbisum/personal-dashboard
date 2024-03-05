@@ -6,7 +6,7 @@ interface WidgetIconProps {
 
 const WidgetIcon: React.FC<WidgetIconProps> = ({ icon, title }) => {
   return (
-    <div className="cursor-pointer flex space-x-8  p-5 bg-gray-200 rounded-md" >
+    <div className="cursor-pointer hover:shadow-2xl flex space-x-8  p-5 bg-gray-200 rounded-md" >
       
       <div>
       {icon}

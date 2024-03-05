@@ -1,5 +1,7 @@
 "use client";
 
+import Loader from "@/Components/Loader";
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 //https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid={API key}
@@ -14,7 +16,7 @@ const Weather = () => {
   const [data, setData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const [location, setLocation] = useState<WeatherType>({ latitude: 0, longitude:0});
-
+  const router = useRouter()
   useEffect(() => {
     if ("geolocation" in navigator) {
       // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
@@ -47,10 +49,13 @@ const Weather = () => {
     }
   }, [location]);
 
-  if (isLoading) return <p>Loading...</p>;
-  if (!data) return <p>No Weather data...</p>;
+  if (isLoading) return <main className="container min-h-screen justify-center items-center mx-auto mt-8"><Loader /></main>;
+  if (!data) return <main className="container min-h-screen mx-auto mt-8">No Weather data...</main>;
   return (
-    <main className="container min-h-screen mx-auto mt-8">
+    <main className="container min-h-screen mx-auto mx-4 mt-8">
+      <button onClick={()=>router.back()} className="bg-blue-500 text-white px-4 py-2 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+      Go Back
+    </button>
       <h1 className="text-3xl text-center font-bold mb-4">
         Weather Information
       </h1>
@@ -59,18 +64,18 @@ const Weather = () => {
           {data?.name}, {data.sys?.country}
         </h2>
         <div className="flex items-center justify-between mb-4">
-          <p className="text-gray-600">Temperature: {data?.main?.temp} C</p>
+          <p className="text-gray-600">Temperature: {data?.main?.temp}°C</p>
           <p className="text-gray-600">
-            Feels Like: {data?.main?.feels_like} C
+            Feels Like: {data?.main?.feels_like}°C
           </p>
         </div>
 
         <div className="flex items-center justify-between mb-4">
           <p className="text-gray-600">
-            Min Temperature: {data?.main?.temp_min} C
+            Min Temperature: {data?.main?.temp_min}°C
           </p>
           <p className="text-gray-600">
-            Max Temperature: {data?.main?.temp_max} C
+            Max Temperature: {data?.main?.temp_max}°C
           </p>
         </div>
 

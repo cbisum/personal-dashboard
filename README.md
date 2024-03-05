@@ -1,36 +1,25 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Personal Dashboard App
 
-## Getting Started
+## Description
 
-First, run the development server:
+This project if useful for people who whant's to get quick access to weather, news and manage their task
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+#### How to Run Localy
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Clone the repository.
+2. Install dependencies: `npm install`.
+3. Run the project: `npm run dev`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### Technical Overview
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Utilized the Geolocation API to get the user's current location in a Next.js app.
+- Used Tailwind, TypeScript and NextJs to build the UI.
+- Used Public REST API to get the information about the current location's weather and Top Headlines.
+- Weather Info - [OpenWeatherMap](https://openweathermap.org)
+- Top Headlines - [WordNewsAPI](https://worldnewsapi.com)
 
-## Learn More
+## License
 
-To learn more about Next.js, take a look at the following resources:
+The MIT License (MIT)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Copyright (c) 202 Chandra Shrestha

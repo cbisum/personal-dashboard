@@ -1,6 +1,7 @@
 // pages/todos.tsx
 "use client"
 
+import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 
 interface Todo {
@@ -11,6 +12,7 @@ interface Todo {
 const TodoApp: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [newTodo, setNewTodo] = useState<string>('');
+  const router = useRouter()
 
   useEffect(() => {
     // Load todos from local storage on page load
@@ -38,7 +40,10 @@ const TodoApp: React.FC = () => {
   };
 
   return (
-    <div className="container min-h-screen mx-auto mt-8">
+    <div className=" min-h-screen m-4 mt-8">
+      <button onClick={()=>router.back()} className="bg-blue-500 text-white px-4 py-2 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+      Go Back
+    </button>
       <h1 className="text-3xl font-bold mb-4">Todo App</h1>
 
       {/* Add Todo */}
