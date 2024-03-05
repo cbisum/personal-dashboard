@@ -54,10 +54,11 @@ const News =()=>{
                 response= await fetch(`https://api.worldnewsapi.com/search-news?api-key=${process.env.NEXT_PUBLIC_NEWS_API_KEY}&text=${selectedSource}`)
             }
             const { news } = await response?.json()
+            console.log(await response?.json())
             setData(news)
             setLoading(false)
         } catch (error) {
-                setError("Error fetching...")
+                setError("Error fetching Information...")
                 setLoading(false)
         }
     }
