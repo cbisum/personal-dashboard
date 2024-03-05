@@ -52,7 +52,7 @@ const Weather = () => {
   if (isLoading) return <main className="container min-h-screen justify-center items-center mx-auto mt-8"><Loader /></main>;
   if (!data) return <main className="container min-h-screen mx-auto mt-8">No Weather data...</main>;
   return (
-    <main className="container min-h-screen mx-auto mx-4 mt-8">
+    <main className="container min-h-screen  mx-4 mt-8">
       <button onClick={()=>router.back()} className="bg-blue-500 text-white px-4 py-2 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
       Go Back
     </button>
