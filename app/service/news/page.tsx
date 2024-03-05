@@ -6,6 +6,7 @@
 import React, { useEffect, useState } from "react"
 import { useRouter } from 'next/navigation'
 import Loader from "@/Components/Loader";
+import ErrorMessage from "@/Components/ErrorMessage";
 const sourceOptions = [
     "Application",
     "Technologies",
@@ -38,6 +39,7 @@ const News =()=>{
     const [loading, setLoading] = useState(false)
     const [data, setData] = useState<NewsArticle[]>([])
     const [selectedSource, setSelectedSource] = useState<string | null >("world")
+    const [error, setError] = useState<string>('')
 
     const router = useRouter()
 
@@ -55,7 +57,7 @@ const News =()=>{
             setData(news)
             setLoading(false)
         } catch (error) {
-                console.log(error)
+                setError("Error fetching...")
                 setLoading(false)
         }
     }
@@ -70,6 +72,8 @@ const News =()=>{
       if(loading)return <div >
         <Loader />
     </div>
+
+    if(error) return <ErrorMessage message={error} />
 
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
